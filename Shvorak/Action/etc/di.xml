@@ -9,4 +9,11 @@
     </type>
     <preference for="Shvorak\Action\Api\Data\ActionInterface" type="Shvorak\Action\Model\Action"/>
     <preference for="Shvorak\Action\Api\ActionRepositoryInterface" type="Shvorak\Action\Model\ItemRepository"/>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="shvorak_action_grid_data_source" xsi:type="string">Shvorak\Action\Model\ResourceModel\Action\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
 </config>

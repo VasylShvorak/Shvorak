@@ -1,12 +1,13 @@
 <?php
 
 
-namespace Shvorak\Action\Controller\Adminhtml\Index;
+namespace Shvorak\Action\Controller\Adminhtml\Action;
+
+
 use Magento\Backend\App\Action;
-use Magento\Framework\Controller\Result\Raw;
 use Magento\Framework\Controller\ResultFactory;
 
-class Index extends Action
+class NewAction extends Action
 {
     public function execute()
     {
