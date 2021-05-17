@@ -1,8 +1,53 @@
 <?php
 /** @var \Shvorak\Action\Block\Actions $block */
+$viewMode = 'list'
+
 ?>
-<?php foreach ($block->getItems() as $item): ?>
+<?php /*foreach ($block->getItems() as $item): */?><!--
 <p>
-    <?php echo $item->getName(); ?>: <?php echo $item->getDescription(); ?>
+    <?php /*echo $item->getName(); */?>: <?php /*echo $item->getDescription(); */?>
 </p>
-<?php endforeach; ?>
+--><?php /*endforeach; */?>
+
+<!--customzie actions list as products on category-->
+<div class="products wrapper <?= /* @noEscape */ $viewMode ?>">
+    <ol class="products list items">
+        <?php foreach ($block->getItems() as $item) :?>
+            <li class="item product">
+                <div class="product">
+                    <?php // Action Image: TODO?>
+                    <a href="<?= $block->escapeUrl($block->getActionUrl($item->getId())) ?>" class="product photo">
+                        <?= $block->getImage() ?>
+                    </a>
+                    <div class="product details">
+                        <?php
+
+                        $info = [];
+                        $info['name'] = '<strong class="product name">'
+                            . ' <a href="' . $block->getActionUrl($item->getId()) . '" title="'
+                            . $block->stripTags($item->getName(), null, true) . '">'
+                            . $item->getName()
+                            . '</a></strong>';
+
+
+                        if ($item->getDescription()) {
+                            $info['description'] =  '<div class="product description">'
+                                . $item->getDescription()
+                                . ' <a href="' . $block->escapeUrl($block->getActionUrl($item->getId())) . '" class="action more">'
+                                . $block->escapeHtml(__('Learn More')) . '</a></div>';
+                        } else {
+                            $info['description'] = '';
+                        }
+
+                        $details = $block->getInfoOrder() ?: ['name','description'];
+                        foreach ($details as $detail) {
+                            /* @noEscape */ echo $info[$detail];
+                        }
+                        ?>
+
+                    </div>
+                </div>
+            </li>
+        <?php endforeach; ?>
+    </ol>
+</div>
