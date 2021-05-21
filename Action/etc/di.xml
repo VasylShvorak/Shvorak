@@ -13,6 +13,7 @@
         <arguments>
             <argument name="collections" xsi:type="array">
                 <item name="shvorak_action_grid_data_source" xsi:type="string">Shvorak\Action\Model\ResourceModel\Action\Grid\Collection</item>
+                <item name="insert_listing_example_data_source" xsi:type="string">S\Shvorak\Action\Model\ResourceModel\Product\Listing\Collection</item>
             </argument>
         </arguments>
     </type>

@@ -78,4 +78,15 @@
             </argument>
         </field>
     </fieldset>
+    <fieldset name="assign_products" sortOrder="40">
+        <settings>
+            <collapsible>false</collapsible>
+            <label translate="true">Products in Action</label>
+        </settings>
+        <container name="assign_products_container" sortOrder="160">
+            <htmlContent name="html_content">
+                <block name="gallery" class="Shvorak\Action\Block\Adminhtml\AssignProducts"/>
+            </htmlContent>
+        </container>
+    </fieldset>
 </form>

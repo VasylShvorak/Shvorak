@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Shvorak\Action\Setup;
-
 
 use Magento\Framework\DB\Ddl\Table;
 use Magento\Framework\Setup\ModuleContextInterface;
@@ -14,7 +12,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
     public function upgrade(SchemaSetupInterface $setup, ModuleContextInterface $context)
     {
         $setup->startSetup();
-        if(version_compare($context->getVersion(), '1.0.1', '<')) {
+        if (version_compare($context->getVersion(), '1.0.1', '<')) {
             $setup->getConnection()->addColumn(
                 $setup->getTable('shvorak_action'),
                 'short_description',
@@ -26,6 +24,34 @@ class UpgradeSchema implements UpgradeSchemaInterface
             );
         }
 
+        if (version_compare($context->getVersion(), '1.0.2', '<')) {
+            $table = $setup->getConnection()->newTable(
+                $setup->getTable('shvorak_action_products')
+            )->addColumn(
+                'id',
+                Table::TYPE_INTEGER,
+                null,
+                ['identity' => true, 'nullable' => false, 'primary' => true],
+                'ID'
+            )->addColumn(
+                'action_id',
+                Table::TYPE_INTEGER,
+                255,
+                ['nullable' => false],
+                'Action ID'
+            )->addColumn(
+                'product_id',
+                Table::TYPE_INTEGER,
+                255,
+                ['nullable' => true],
+                'Product ID'
+            )->addIndex(
+                $setup->getIdxName('shvorak_action_products', ['action_id']),
+                ['action_id']
+            )->setComment('Product list for actions');
+
+            $setup->getConnection()->createTable($table);
+        }
         $setup->endSetup();
     }
 }

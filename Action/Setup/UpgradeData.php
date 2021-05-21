@@ -25,6 +25,29 @@ class UpgradeData implements UpgradeDataInterface
             );
         }
 
+        if(version_compare($context->getVersion(), '1.0.2', '<')) {
+            $setup->getConnection()->insert(
+                $setup->getTable('shvorak_action_products'),
+                [
+                    'action_id' => 1,
+                    'product_id' => 1
+                ]
+            );
+            $setup->getConnection()->insert(
+                $setup->getTable('shvorak_action_products'),
+                [
+                    'action_id' => 1,
+                    'product_id' => 2
+                ]
+            );
+            $setup->getConnection()->insert(
+                $setup->getTable('shvorak_action_products'),
+                [
+                    'action_id' => 2,
+                    'product_id' => 1
+                ]
+            );
+        }
         $setup->endSetup();
     }
 }
