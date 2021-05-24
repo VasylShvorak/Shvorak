@@ -200,7 +200,7 @@ class ProductGrid extends \Magento\Backend\Block\Widget\Grid\Extended
      */
     public function getGridUrl()
     {
-        return $this->getUrl('shvorak/action/grid', ['_current' => true]);
+        return $this->getUrl('action/action/grid', ['_current' => true]);
     }
     /**
      * @return array
