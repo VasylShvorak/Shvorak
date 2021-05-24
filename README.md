@@ -1,2 +1,2 @@
-# Test-Magento-Actions-Project
-Add action functionality
+# Test Project Purpose
+Add action functionality 
