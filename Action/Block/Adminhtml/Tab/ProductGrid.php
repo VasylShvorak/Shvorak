@@ -143,19 +143,17 @@ class ProductGrid extends \Magento\Backend\Block\Widget\Grid\Extended
      */
     protected function _prepareColumns()
     {
-        if ($this->getAction()->getProductsLoad()) {
-            $this->addColumn(
-                'in_action',
-                [
-                    'type' => 'checkbox',
-                    'name' => 'in_action',
-                    'values' => $this->_getSelectedProducts(),
-                    'header_css_class' => 'col-select col-massaction',
-                    'column_css_class' => 'col-select col-massaction',
-                    'index' => 'entity_id',
-                ]
-            );
-        }
+        $this->addColumn(
+            'in_action',
+            [
+                'type' => 'checkbox',
+                'name' => 'in_action',
+                'values' => $this->_getSelectedProducts(),
+                'header_css_class' => 'col-select col-massaction',
+                'column_css_class' => 'col-select col-massaction',
+                'index' => 'entity_id',
+            ]
+        );
         $this->addColumn(
             'entity_id',
             [
