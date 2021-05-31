@@ -65,7 +65,6 @@ class Action extends AbstractDb
             $object->setPath($object->getPath() . $object->getId());
             $this->_savePath($object);
         }
-
         $this->_saveActionProducts($object);
         return parent::_afterSave($object);
     }
@@ -132,5 +131,15 @@ class Action extends AbstractDb
             }
             $connection->insertMultiple($this->getActionProductTable(), $data);
         }
+    }
+
+    public function getImageName($id)
+    {
+        $connection = $this->getConnection();
+        $bind = ['id' => $id];
+        $select = $connection->select()->from($this->getTable('shvorak_action'),
+        ['image']
+        )->where('id = :id');
+        return $connection->fetchOne($select,$bind);
     }
 }

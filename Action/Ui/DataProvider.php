@@ -4,7 +4,6 @@ namespace Shvorak\Action\Ui;
 
 use Magento\Ui\DataProvider\AbstractDataProvider;
 
-
 class DataProvider extends AbstractDataProvider
 {
     protected $collection;
@@ -25,7 +24,16 @@ class DataProvider extends AbstractDataProvider
     {
         $result = [];
         foreach ($this->collection->getItems() as $item) {
-            $result[$item->getId()]['general'] = $item->getData();
+            $itemData = $item->getData();
+            $imageName = $itemData['image']; // Your database field
+            unset($itemData['image']);
+            $itemData['image'] = [
+                [
+                    'name'  =>  $imageName,
+                    'url'   =>  $item->getImage() // Should return a URL to view the image. For example, http://domain.com/pub/media/../../imagename.jpeg
+                ]
+            ];
+            $result[$item->getId()]['general'] = $itemData;
         }
         return $result;
     }

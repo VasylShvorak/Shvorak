@@ -15,4 +15,9 @@ class Product extends AbstractModel
     {
         $this->_resource->getLoadSelect('action_id', $this->getActionId(), $this);
     }
+
+    public function deleteActionProducts($actionId)
+    {
+        $this->getResource()->deleteActionProducts($actionId);
+    }
 }

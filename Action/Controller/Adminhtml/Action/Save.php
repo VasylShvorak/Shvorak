@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Shvorak\Action\Controller\Adminhtml\Action;
-
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
@@ -29,11 +27,20 @@ class Save extends Action
     {
         $actionPostData = $this->getRequest()->getPostValue();
         $action = $this->actionFactory->create();
-        $actionProducts = $this->actionProductsFactory->create();
+        //set image path
         $action->setData(
             $this->getRequest()->getPostValue()['general']
         );
-
+        if(isset($actionPostData['general']['image'])) {
+            if (!$action->checkImageExist($actionPostData)) {
+                $action->prepareImage();
+            } else {
+                $action->setData('image', $actionPostData['general']['image'][0]['name']);
+            }
+        }
+        /*$actionData = $action->filterActionImageData($action->getData());
+        $imageName = $action->checkUniqueImageName($actionData['image']);*/
+        //$action->setData('image', $imageName);
         //save action products from grid
         if (isset($actionPostData['action_products'])
             && is_string($actionPostData['action_products'])
@@ -42,14 +49,6 @@ class Save extends Action
             $action->setPostedProducts($products);
         }
         $action->save();
-
-        //save checked products in grid
-        /*if (isset($actionPostData['action_products'])
-            && is_string($actionPostData['action_products'])
-        ) {
-            $products = json_decode($actionPostData['action_products'], true);
-            $actionProducts->setPostedProducts($products);
-        }*/
 
         return $this->resultRedirectFactory->create()->setPath('action/index/index');
     }

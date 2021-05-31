@@ -11,6 +11,8 @@ use Magento\Ui\Component\Listing\Columns\Column;
 class Actions extends Column
 {
     const URL_PATH_EDIT = 'action/action/edit';
+    const URL_PATH_DELETE = 'action/action/delete';
+
     /**
      * @var UrlInterface
      */
@@ -37,6 +39,7 @@ class Actions extends Column
     {
         if (isset($dataSource['data']['items'])) {
             foreach ($dataSource['data']['items'] as &$item) {
+                $title = $item['name'];
                 // here we can also use the data from $item to configure some parameters of an action URL
                 $item[$this->getData('name')] = [
                     'edit' => [
@@ -49,8 +52,18 @@ class Actions extends Column
                         'label' => __('Edit')
                     ],
                     'remove' => [
-                        'href' => '/remove',
-                        'label' => __('Remove')
+                        'href' => $this->urlBuilder->getUrl(
+                            static::URL_PATH_DELETE,
+                            [
+                                'id' => $item['id'],
+                            ]
+                        ),
+                        'label' => __('Remove'),
+                        'confirm' => [
+                            'title' => __('Delete %1', $title),
+                            'message' => __('Are you sure you want to delete a %1 record?', $title),
+                        ],
+                        'post' => true,
                     ],
                     'duplicate' => [
                         'href' => '/duplicate',

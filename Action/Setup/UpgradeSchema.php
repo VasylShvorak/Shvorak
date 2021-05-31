@@ -52,6 +52,20 @@ class UpgradeSchema implements UpgradeSchemaInterface
 
             $setup->getConnection()->createTable($table);
         }
+
+        if (version_compare($context->getVersion(), '1.0.3', '<')) {
+            $setup->getConnection()->addColumn(
+                $setup->getTable('shvorak_action'),
+                'image',
+                [
+                    'type' => Table::TYPE_TEXT,
+                    'size' => 255,
+                    'nullable' => true,
+                    'comment' => 'Action Image'
+                ]
+            );
+        }
+
         $setup->endSetup();
     }
 }

@@ -13,8 +13,36 @@
         <arguments>
             <argument name="collections" xsi:type="array">
                 <item name="shvorak_action_grid_data_source" xsi:type="string">Shvorak\Action\Model\ResourceModel\Action\Grid\Collection</item>
-                <item name="insert_listing_example_data_source" xsi:type="string">S\Shvorak\Action\Model\ResourceModel\Product\Listing\Collection</item>
+                <item name="insert_listing_example_data_source" xsi:type="string">Shvorak\Action\Model\ResourceModel\Product\Listing\Collection</item>
             </argument>
+        </arguments>
+    </type>
+    <virtualType name="Shvorak\Action\ActionImageUpload" type="Magento\Catalog\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">shvorak/tmp/action</argument>
+            <argument name="basePath" xsi:type="string">shvorak/action</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument>
+            <argument name="allowedMimeTypes" xsi:type="array">
+                <item name="jpg" xsi:type="string">image/jpg</item>
+                <item name="jpeg" xsi:type="string">image/jpeg</item>
+                <item name="gif" xsi:type="string">image/gif</item>
+                <item name="png" xsi:type="string">image/png</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Shvorak\Action\Controller\Adminhtml\Action\Image\Upload">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Shvorak\Action\ActionImageUpload</argument>
+        </arguments>
+    </type>
+    <type name="Shvorak\Action\Model\Image">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Shvorak\Action\ActionImageUpload</argument>
         </arguments>
     </type>
 </config>

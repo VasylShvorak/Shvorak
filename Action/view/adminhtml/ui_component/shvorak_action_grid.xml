@@ -59,7 +59,18 @@
                 </item>
             </argument>
         </selectionsColumn>
-        <column name="name">
+        <column name="image" class="Shvorak\Action\Ui\Component\Listing\Column\Thumbnail" sortOrder="10">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/thumbnail</item>
+                    <item name="sortable" xsi:type="boolean">false</item>
+                    <item name="altField" xsi:type="string">title</item>
+                    <item name="has_preview" xsi:type="string">1</item>
+                    <item name="label" xsi:type="string" translate="true">Image</item>
+                </item>
+            </argument>
+        </column>
+        <column name="name" sortOrder="20">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">text</item>
@@ -67,7 +78,7 @@
                 </item>
             </argument>
         </column>
-        <column name="description">
+        <column name="description" sortOrder="30">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">text</item>
@@ -75,7 +86,7 @@
                 </item>
             </argument>
         </column>
-        <actionsColumn name="actions" class="Shvorak\Action\Ui\Component\Listing\Column\Actions">
+        <actionsColumn name="actions" class="Shvorak\Action\Ui\Component\Listing\Column\Actions" sortOrder="40">
             <settings>
                 <label translate="true">Actions</label>
             </settings>
